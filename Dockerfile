@@ -10,7 +10,7 @@ USER arch
 WORKDIR /home/arch
 RUN git clone https://aur.archlinux.org/cower.git cower\
     && cd cower\
-    && makepkg -sri --noconfirm\
+    && makepkg -sri --noconfirm --skippgpcheck\
     && cd ~\
     && git clone https://aur.archlinux.org/pacaur.git pacaur\
     && cd pacaur\
