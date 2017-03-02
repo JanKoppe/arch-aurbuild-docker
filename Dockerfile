@@ -8,9 +8,10 @@ RUN useradd -m arch\
 
 USER arch
 WORKDIR /home/arch
-RUN git clone https://aur.archlinux.org/cower.git cower\
+RUN gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53\
+    && git clone https://aur.archlinux.org/cower.git cower\
     && cd cower\
-    && makepkg -sri --noconfirm --skippgpcheck\
+    && makepkg -sri --noconfirm\
     && cd ~\
     && git clone https://aur.archlinux.org/pacaur.git pacaur\
     && cd pacaur\
