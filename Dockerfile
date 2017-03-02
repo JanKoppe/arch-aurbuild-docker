@@ -2,8 +2,9 @@ FROM jankoppe/arch:latest
 LABEL maintainer "Jan Koppe <post@jankoppe.de>"
 
 RUN useradd -m arch\
-    && pacman -Syy --noconfirm\
-    && pacman -S --noconfirm base-devel git vi\
+    && echo "Include = /etc/pacman.d/*.conf" >> /etc/pacman.conf\
+    && touch /etc/pacman.d/nop.conf\
+    && pacman -Syy --noconfirm base-devel git vi\
     && echo "arch ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER arch
@@ -23,4 +24,4 @@ RUN gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53\
 VOLUME /home/arch/out
 ENV PKGDEST=/home/arch/out
 
-ENTRYPOINT ["pacaur", "-Sm", "--noconfirm", "--noedit", "--silent"]
+ENTRYPOINT ["pacaur", "-Sm", "--noconfirm", "--noedit"]
